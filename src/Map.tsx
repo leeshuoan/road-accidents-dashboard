@@ -1,12 +1,8 @@
 import { useState } from 'react';
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
 import { GoogleMap, LoadScript, MarkerF, TrafficLayerF } from '@react-google-maps/api';
 
 function Map() {
-  const mapStyles = {
-    height: "100%",
-    width: "100%"
-  };
-
   const defaultCenter = {
     lat: 1.3521,
     lng: 103.8198
@@ -50,27 +46,36 @@ function Map() {
 
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyCKEnQUKG9So2z23TYtvfUiFBahgWwzvRc"> {/* Add your API key here */}
-      <div id="map" style={{ height: '100vh', width: '100%' }}> {/* Map container */}
-        <button onClick={toggleTrafficLayer}>
+    <div className='w-full h-screen'>
+      <LoadScript googleMapsApiKey="AIzaSyCKEnQUKG9So2z23TYtvfUiFBahgWwzvRc">
+        <button
+          onClick={toggleTrafficLayer}
+        >
           {trafficLayerVisible ? "Hide Traffic" : "Show Traffic"}
         </button>
-        <GoogleMap
-          key={mapKey}
-          mapContainerStyle={mapStyles}
-          zoom={12}
-          center={defaultCenter}
-        >
-          {coordinates.map((coord, index) => (
-            <MarkerF
-              key={index}
-              position={{ lat: coord.latitude, lng: coord.longitude }}
-            />
-          ))}
-          {trafficLayerVisible && <TrafficLayerF />}
-        </GoogleMap>
-      </div>
-    </LoadScript>
+
+
+        <div id="map" className='h-screen w-full'>
+          <GoogleMap
+            key={mapKey}
+            mapContainerStyle={{
+              height: "100%",
+              width: "100%"
+            }}
+            zoom={12}
+            center={defaultCenter}
+          >
+            {coordinates.map((coord, index) => (
+              <MarkerF
+                key={index}
+                position={{ lat: coord.latitude, lng: coord.longitude }}
+              />
+            ))}
+            {trafficLayerVisible && <TrafficLayerF />}
+          </GoogleMap>
+        </div>
+      </LoadScript>
+    </div>
   );
 }
 
