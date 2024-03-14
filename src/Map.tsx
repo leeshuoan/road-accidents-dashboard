@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { TwitterTimelineEmbed } from 'react-twitter-embed';
 import { GoogleMap, LoadScript, MarkerF, TrafficLayerF } from '@react-google-maps/api';
 
 function Map() {
