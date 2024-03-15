@@ -16,9 +16,9 @@ const Dashboard = () => {
             <div className='text-2xl text-center font-bold mb-5'>Road Accidents Dashboard</div>
             <div className='lg:flex space-between gap-5'>
                 <Map trafficLayerVisible={trafficLayerVisible} mapKey={mapKey} />
-                <div className="lg:w-1/4">
+                <div className="lg:w-1/3">
                     <div className='hidden lg:block text-l font-bold'>Map Settings</div>
-                    <div className="mb-5 inline-flex items-center">
+                    <div className="mb-4 inline-flex items-center">
                         <label className="relative flex items-center rounded-full cursor-pointer" htmlFor="check">
                             <input
                                 type="checkbox"

@@ -11,6 +11,7 @@ function Map({trafficLayerVisible, mapKey}: MapProps) {
     lng: 103.8198
   };
 
+  // TODO: real time api data fetching?
   const coordinates = [
     { latitude: 1.3440742395151700, longitude: 103.86599825617400 },
     { latitude: 1.4004433619829700, longitude: 103.7736628068410 },
@@ -41,11 +42,11 @@ function Map({trafficLayerVisible, mapKey}: MapProps) {
 
 
   return (
-    <div className='w-full h-screen'>
+    <>
       <LoadScript googleMapsApiKey="AIzaSyCKEnQUKG9So2z23TYtvfUiFBahgWwzvRc">
-        
-
-        <div id="map" className='h-screen w-full'>
+        {/* TODO: Last Updated: XX:XX:XX?
+        Button to refresh and fetch new data and re-render map? */}
+        <div id="map" className='h-[700px] w-full'>
           <GoogleMap
             key={mapKey}
             mapContainerStyle={{
@@ -65,7 +66,7 @@ function Map({trafficLayerVisible, mapKey}: MapProps) {
           </GoogleMap>
         </div>
       </LoadScript>
-    </div>
+    </>
   );
 }
 
