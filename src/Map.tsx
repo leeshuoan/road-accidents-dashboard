@@ -1,18 +1,14 @@
-import { useState } from 'react';
 import { GoogleMap, LoadScript, MarkerF, TrafficLayerF } from '@react-google-maps/api';
 
-function Map() {
+interface MapProps {
+  trafficLayerVisible: boolean;
+  mapKey: number;
+}
+
+function Map({trafficLayerVisible, mapKey}: MapProps) {
   const defaultCenter = {
     lat: 1.3521,
     lng: 103.8198
-  };
-
-  const [trafficLayerVisible, setTrafficLayerVisible] = useState(false);
-  const [mapKey, setMapKey] = useState(0);
-
-  const toggleTrafficLayer = () => {
-    setTrafficLayerVisible(!trafficLayerVisible);
-    setMapKey(mapKey + 1);
   };
 
   const coordinates = [
@@ -47,12 +43,7 @@ function Map() {
   return (
     <div className='w-full h-screen'>
       <LoadScript googleMapsApiKey="AIzaSyCKEnQUKG9So2z23TYtvfUiFBahgWwzvRc">
-        <button
-          onClick={toggleTrafficLayer}
-        >
-          {trafficLayerVisible ? "Hide Traffic" : "Show Traffic"}
-        </button>
-
+        
 
         <div id="map" className='h-screen w-full'>
           <GoogleMap

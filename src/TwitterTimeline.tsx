@@ -2,11 +2,11 @@ import { TwitterTimelineEmbed } from "react-twitter-embed";
 
 const TwitterTimeline = () => {
     return (
-        <div className="w-1/4">
+        <div>
             <TwitterTimelineEmbed
                 sourceType="profile"
                 screenName="LTAtrafficnews"
-                options={{ height: 400 }}
+                options={{ height: 600 }}
             />
         </div>
     );
