@@ -1,20 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Map from "./Map";
 import TwitterTimeline from "./TwitterTimeline";
 
+interface AccidentData {
+  type: string;
+  Latitude: number;
+  Longitude: number;
+  CurrentDateTime: string;
+  Message: string;
+  Content: string;
+  TimeStamp: string;
+  Time: string;
+}
+
 const Dashboard = () => {
+  const [center] = useState({ lat: 1.3521, lng: 103.8198 });
+  const [mapKey, setMapKey] = useState<number>(0);
   const [trafficLayerVisible, setTrafficLayerVisible] =
     useState<boolean>(false);
-  const [mapKey, setMapKey] = useState<number>(0);
-  const [center] = useState<{ lat: number; lng: number }>({
-    lat: 1.3521,
-    lng: 103.8198,
-  });
+  const [accidentData, setAccidentData] = useState<AccidentData[]>([
+    {
+      type: "",
+      Latitude: 0,
+      Longitude: 0,
+      CurrentDateTime: "",
+      Message: "",
+      Content: "",
+      TimeStamp: "",
+      Time: "",
+    },
+  ]);
 
   const toggleTrafficLayer = () => {
     setTrafficLayerVisible(!trafficLayerVisible);
     setMapKey(mapKey + 1);
   };
+
+  useEffect(() => {
+    fetch(
+      "https://kxsfbbgbxc.execute-api.ap-southeast-1.amazonaws.com/RoadAccidentsAPI"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setAccidentData(data);
+      });
+  }, []);
 
   return (
     <>
@@ -22,7 +52,12 @@ const Dashboard = () => {
         Road Accidents Dashboard
       </div>
       <div className="lg:flex space-between gap-5">
-        <Map trafficLayerVisible={trafficLayerVisible} mapKey={mapKey} center={center}/>
+        <Map
+          trafficLayerVisible={trafficLayerVisible}
+          mapKey={mapKey}
+          center={center}
+          accidentData={accidentData}
+        />
         <div className="lg:w-1/3">
           <div className="hidden lg:block text-l font-bold">Map Settings</div>
           <div className="mb-4 inline-flex items-center">
@@ -70,4 +105,5 @@ const Dashboard = () => {
   );
 };
 
+export type { AccidentData };
 export default Dashboard;

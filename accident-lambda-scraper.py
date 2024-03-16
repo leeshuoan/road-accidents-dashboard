@@ -3,6 +3,7 @@ import boto3
 import pandas as pd
 import requests
 from datetime import datetime
+from difflib import SequenceMatcher
 from io import StringIO
 from io import BytesIO
 
@@ -12,14 +13,38 @@ def lambda_handler(event, context):
 
     s3 = boto3.client('s3')
     
+    def is_similar(a, b):
+        similarity = SequenceMatcher(None, a, b).ratio()
+        return similarity > 0.8
+    
+    def create_bins(df):
+        bins = []
+        for i in range(len(df)):
+            found_bin = False
+            for bin_indices in bins:
+                if is_similar(df.loc[i, 'Message'], df.loc[bin_indices[0], 'Message']):
+                    bin_indices.append(i)
+                    found_bin = True
+                    break
+            if not found_bin:
+                bins.append([i])
+        return bins
+    
+    def drop_duplicates_from_bins(df, bins):
+        for bin_indices in bins:
+            if len(bin_indices) > 1:
+                latest_index = max(bin_indices, key=lambda x: df.loc[x, 'Time'])
+                latest_timestamp = df.loc[latest_index, 'Time']
+                filtered_indices = [idx for idx in bin_indices if (latest_timestamp - df.loc[idx, 'Time']).total_seconds() >= 1800]
+                df.drop(index=[idx for idx in bin_indices if idx not in filtered_indices and idx != latest_index], inplace=True)
+        return df
+    
     try:
         response = s3.get_object(Bucket=s3_bucket, Key=s3_key)
         content = response['Body'].read()
         existing_df = pd.read_csv(BytesIO(content))
     except Exception as e:
         existing_df = pd.DataFrame()
-        
-    print(existing_df)
         
     url = "http://datamall2.mytransport.sg/ltaodataservice/TrafficIncidents"
     headers = {
@@ -51,6 +76,14 @@ def lambda_handler(event, context):
 
         response_df = pd.DataFrame(formatted_data)
         new_df = pd.concat([existing_df, response_df], ignore_index=True)
+        
+        new_df['Content'] = new_df['Message'].str.split(n=1).str[1]
+        new_df['Timestamp'] = new_df['Message'].str.split(n=1).str[0]
+        new_df['Time'] = new_df['Message'].str.split(')').str[1].str.split().str[0]
+        new_df['Time'] = pd.to_datetime(new_df['Time'], format='%H:%M')
+        
+        bins = create_bins(new_df)
+        filtered_df = drop_duplicates_from_bins(new_df, bins)
         save_df = new_df.drop_duplicates(subset=["Message"])
 
         csv_buffer = StringIO()
