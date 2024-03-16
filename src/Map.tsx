@@ -1,68 +1,93 @@
-import { GoogleMap, LoadScript, MarkerF, TrafficLayerF } from '@react-google-maps/api';
+import { useState } from "react";
+import {
+  GoogleMap,
+  LoadScript,
+  MarkerF,
+  TrafficLayerF,
+  InfoWindowF,
+} from "@react-google-maps/api";
 
 interface MapProps {
   trafficLayerVisible: boolean;
   mapKey: number;
+  center: {
+    lat: number;
+    lng: number;
+  };
 }
 
-function Map({trafficLayerVisible, mapKey}: MapProps) {
-  const defaultCenter = {
-    lat: 1.3521,
-    lng: 103.8198
-  };
+function Map({ trafficLayerVisible, mapKey, center }: MapProps) {
+  const [selectedMarker, setSelectedMarker] = useState<number | null>(null);
 
   // TODO: real time api data fetching?
   const coordinates = [
-    { latitude: 1.3440742395151700, longitude: 103.86599825617400 },
-    { latitude: 1.4004433619829700, longitude: 103.7736628068410 },
-    { latitude: 1.4004433619829700, longitude: 103.7736628068410 },
-    { latitude: 1.3597189249660600, longitude: 103.85786894546100 },
-    { latitude: 1.328741223521980, longitude: 103.91181318126200 },
-    { latitude: 1.321337162355010, longitude: 103.7534800484320 },
-    { latitude: 1.3212685986015700, longitude: 103.75363810586800 },
-    { latitude: 1.3407532507705000, longitude: 103.94615622047800 },
-    { latitude: 1.3281741687594100, longitude: 103.82460484119200 },
-    { latitude: 1.3313389574592000, longitude: 103.87926445856800 },
-    { latitude: 1.3909997731723800, longitude: 103.77591453048100 },
-    { latitude: 1.3508197994669800, longitude: 103.857847371259 },
-    { latitude: 1.4154956915664500, longitude: 103.77141433878900 },
-    { latitude: 1.3956301329345700, longitude: 103.85766874977600 },
-    { latitude: 1.4156329015820000, longitude: 103.7714143351500 },
-    { latitude: 1.3508197994669800, longitude: 103.857847371259 },
-    { latitude: 1.394871886223720, longitude: 103.90636428849600 },
-    { latitude: 1.3925935461007400, longitude: 103.8580285185470 },
-    { latitude: 1.4004911154735400, longitude: 103.895985776442 },
-    { latitude: 1.3294035137159300, longitude: 103.85223812356000 },
-    { latitude: 1.2894023800617100, longitude: 103.86092130815600 },
-    { latitude: 1.289514875241480, longitude: 103.86080685318700 },
-    { latitude: 1.4252452217170000, longitude: 103.77684058910500 },
-    { latitude: 1.3402959254992100, longitude: 103.80522754410800 },
-    { latitude: 1.3390862893663400, longitude: 103.80651940708700 }
+    { latitude: 1.34407423951517, longitude: 103.865998256174 },
+    { latitude: 1.40044336198297, longitude: 103.773662806841 },
+    { latitude: 1.40044336198297, longitude: 103.773662806841 },
+    { latitude: 1.35971892496606, longitude: 103.857868945461 },
+    { latitude: 1.32874122352198, longitude: 103.911813181262 },
+    { latitude: 1.32133716235501, longitude: 103.753480048432 },
+    { latitude: 1.32126859860157, longitude: 103.753638105868 },
+    { latitude: 1.3407532507705, longitude: 103.946156220478 },
+    { latitude: 1.32817416875941, longitude: 103.824604841192 },
+    { latitude: 1.3313389574592, longitude: 103.879264458568 },
+    { latitude: 1.39099977317238, longitude: 103.775914530481 },
+    { latitude: 1.35081979946698, longitude: 103.857847371259 },
+    { latitude: 1.41549569156645, longitude: 103.771414338789 },
+    { latitude: 1.39563013293457, longitude: 103.857668749776 },
+    { latitude: 1.415632901582, longitude: 103.77141433515 },
+    { latitude: 1.35081979946698, longitude: 103.857847371259 },
+    { latitude: 1.39487188622372, longitude: 103.906364288496 },
+    { latitude: 1.39259354610074, longitude: 103.858028518547 },
+    { latitude: 1.40049111547354, longitude: 103.895985776442 },
+    { latitude: 1.32940351371593, longitude: 103.85223812356 },
+    { latitude: 1.28940238006171, longitude: 103.860921308156 },
+    { latitude: 1.28951487524148, longitude: 103.860806853187 },
+    { latitude: 1.425245221717, longitude: 103.776840589105 },
+    { latitude: 1.34029592549921, longitude: 103.805227544108 },
+    { latitude: 1.33908628936634, longitude: 103.806519407087 },
   ];
-
 
   return (
     <>
       <LoadScript googleMapsApiKey="AIzaSyCKEnQUKG9So2z23TYtvfUiFBahgWwzvRc">
         {/* TODO: Last Updated: XX:XX:XX?
         Button to refresh and fetch new data and re-render map? */}
-        <div id="map" className='h-[700px] w-full'>
+        <div id="map" className="h-[700px] w-full">
           <GoogleMap
             key={mapKey}
             mapContainerStyle={{
               height: "100%",
-              width: "100%"
+              width: "100%",
             }}
             zoom={12}
-            center={defaultCenter}
+            center={center}
           >
             {coordinates.map((coord, index) => (
               <MarkerF
                 key={index}
                 position={{ lat: coord.latitude, lng: coord.longitude }}
+                title="Accident"
+                onMouseOver={() => setSelectedMarker(index)}
+                onMouseOut={() => setSelectedMarker(null)}
               />
             ))}
             {trafficLayerVisible && <TrafficLayerF />}
+            {selectedMarker !== null && (
+              <InfoWindowF
+                position={{
+                  lat: coordinates[selectedMarker].latitude,
+                  lng: coordinates[selectedMarker].longitude,
+                }}
+                options={{ pixelOffset: new window.google.maps.Size(0, -35) }}
+                onCloseClick={() => setSelectedMarker(null)}
+              >
+                <div>
+                  {/* Add your description content here */}
+                  Accident occurred here
+                </div>
+              </InfoWindowF>
+            )}
           </GoogleMap>
         </div>
       </LoadScript>
