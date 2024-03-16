@@ -53,7 +53,8 @@ function Map({ trafficLayerVisible, mapKey, center, accidentData }: MapProps) {
                 onCloseClick={() => setSelectedMarker(null)}
               >
                 <div>
-                  {accidentData[selectedMarker].Message}
+                  <b>{new Date(accidentData[selectedMarker].Timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</b>
+                  {accidentData[selectedMarker].Content}
                 </div>
               </InfoWindowF>
             )}
