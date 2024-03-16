@@ -2,7 +2,7 @@ import json
 import boto3
 import pandas as pd
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 from difflib import SequenceMatcher
 from io import StringIO
 from io import BytesIO
@@ -12,32 +12,18 @@ def lambda_handler(event, context):
     s3_key = 'traffic_data.csv'
 
     s3 = boto3.client('s3')
-    
-    def is_similar(a, b):
-        similarity = SequenceMatcher(None, a, b).ratio()
-        return similarity > 0.8
-    
-    def create_bins(df):
-        bins = []
-        for i in range(len(df)):
-            found_bin = False
-            for bin_indices in bins:
-                if is_similar(df.loc[i, 'Message'], df.loc[bin_indices[0], 'Message']):
-                    bin_indices.append(i)
-                    found_bin = True
-                    break
-            if not found_bin:
-                bins.append([i])
-        return bins
-    
-    def drop_duplicates_from_bins(df, bins):
-        for bin_indices in bins:
-            if len(bin_indices) > 1:
-                latest_index = max(bin_indices, key=lambda x: df.loc[x, 'Time'])
-                latest_timestamp = df.loc[latest_index, 'Time']
-                filtered_indices = [idx for idx in bin_indices if (latest_timestamp - df.loc[idx, 'Time']).total_seconds() >= 1800]
-                df.drop(index=[idx for idx in bin_indices if idx not in filtered_indices and idx != latest_index], inplace=True)
-        return df
+        
+    def get_duplicates(df):
+        duplicate_indices = []
+        for i in range(len(df)-1):
+            time_diff = df.loc[i, 'Timestamp'] - df.loc[i+1, 'Timestamp']
+            if time_diff <= timedelta(minutes=15):
+                similarity = SequenceMatcher(None, df.loc[i, 'Message'], df.loc[i+1, 'Message']).ratio()
+                if similarity >= 0.9:
+                    duplicate_indices.append(i)
+                
+        return duplicate_indices
+
     
     try:
         response = s3.get_object(Bucket=s3_bucket, Key=s3_key)
@@ -75,16 +61,17 @@ def lambda_handler(event, context):
         ]
 
         response_df = pd.DataFrame(formatted_data)
-        new_df = pd.concat([existing_df, response_df], ignore_index=True)
+        df = pd.concat([existing_df, response_df], ignore_index=True)
         
-        new_df['Content'] = new_df['Message'].str.split(n=1).str[1]
-        new_df['Timestamp'] = new_df['Message'].str.split(n=1).str[0]
-        new_df['Time'] = new_df['Message'].str.split(')').str[1].str.split().str[0]
-        new_df['Time'] = pd.to_datetime(new_df['Time'], format='%H:%M')
-        
-        bins = create_bins(new_df)
-        filtered_df = drop_duplicates_from_bins(new_df, bins)
-        save_df = new_df.drop_duplicates(subset=["Message"])
+        df['Content'] = df['Message'].str.split(n=1).str[1]
+        df['Timestamp'] = df['Message'].str.split(n=1).str[0]
+        df[['Date', 'Time']] = df['Timestamp'].str.split(')', expand=True)
+        df['Date'] = df['Date'].str.strip('(') + '/2024'
+        df['Timestamp'] = pd.to_datetime(df['Date'] + ' ' + df['Time'], format='%d/%m/%Y %H:%M')
+        save_df = df.drop(columns=['Date', 'Time'])
+
+        duplicates_indices = get_duplicates(df)
+        save_df.drop(index=duplicates_indices, inplace=True)
 
         csv_buffer = StringIO()
         save_df.to_csv(csv_buffer, index=False)

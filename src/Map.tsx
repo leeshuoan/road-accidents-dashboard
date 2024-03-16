@@ -38,7 +38,7 @@ function Map({ trafficLayerVisible, mapKey, center, accidentData }: MapProps) {
                 key={index}
                 position={{ lat: accident.Latitude, lng: accident.Longitude }}
                 title="Accident"
-                onMouseOver={() => setSelectedMarker(index)}
+                onMouseOver={() => {setSelectedMarker(index)}}
                 onMouseOut={() => setSelectedMarker(null)}
               />
             ))}

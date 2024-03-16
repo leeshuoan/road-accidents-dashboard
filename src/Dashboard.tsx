@@ -3,14 +3,13 @@ import Map from "./Map";
 import TwitterTimeline from "./TwitterTimeline";
 
 interface AccidentData {
-  type: string;
+  Type: string;
   Latitude: number;
   Longitude: number;
   CurrentDateTime: string;
   Message: string;
   Content: string;
-  TimeStamp: string;
-  Time: string;
+  Timestamp: string;
 }
 
 const Dashboard = () => {
@@ -20,14 +19,13 @@ const Dashboard = () => {
     useState<boolean>(false);
   const [accidentData, setAccidentData] = useState<AccidentData[]>([
     {
-      type: "",
+      Type: "",
       Latitude: 0,
       Longitude: 0,
       CurrentDateTime: "",
       Message: "",
       Content: "",
-      TimeStamp: "",
-      Time: "",
+      Timestamp: "",
     },
   ]);
 
@@ -43,6 +41,7 @@ const Dashboard = () => {
       .then((response) => response.json())
       .then((data) => {
         setAccidentData(data);
+        console.log(data)
       });
   }, []);
 
