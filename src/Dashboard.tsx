@@ -6,7 +6,7 @@ const Dashboard = () => {
   const [trafficLayerVisible, setTrafficLayerVisible] =
     useState<boolean>(false);
   const [mapKey, setMapKey] = useState<number>(0);
-  const [center, setCenter] = useState<{ lat: number; lng: number }>({
+  const [center] = useState<{ lat: number; lng: number }>({
     lat: 1.3521,
     lng: 103.8198,
   });
