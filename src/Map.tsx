@@ -38,7 +38,9 @@ function Map({ trafficLayerVisible, mapKey, center, accidentData }: MapProps) {
                 key={index}
                 position={{ lat: accident.Latitude, lng: accident.Longitude }}
                 title="Accident"
-                onMouseOver={() => {setSelectedMarker(index)}}
+                onMouseOver={() => {
+                  setSelectedMarker(index);
+                }}
                 onMouseOut={() => setSelectedMarker(null)}
               />
             ))}
@@ -53,7 +55,17 @@ function Map({ trafficLayerVisible, mapKey, center, accidentData }: MapProps) {
                 onCloseClick={() => setSelectedMarker(null)}
               >
                 <div>
-                  <b>{new Date(accidentData[selectedMarker].Timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</b>
+                  <b>
+                    {new Date(
+                      accidentData[selectedMarker].Timestamp
+                    ).toLocaleTimeString([], {
+                      month: "short",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </b>
+                  &nbsp;
                   {accidentData[selectedMarker].Content}
                 </div>
               </InfoWindowF>
