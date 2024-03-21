@@ -15,7 +15,7 @@ def lambda_handler(event, context):
     
     def is_similar(a, b):
         similarity = SequenceMatcher(None, a, b).ratio()
-        return similarity > 0.9
+        return similarity > 0.85
     
     def create_bins(df):
         bins = []
@@ -76,6 +76,8 @@ def lambda_handler(event, context):
 
         response_df = pd.DataFrame(formatted_data)
         df = pd.concat([existing_df, response_df], ignore_index=True)
+        df = df.drop_duplicates(subset=["Message"])
+
         
         df['Content'] = df['Message'].str.split(n=1).str[1]
         df['Timestamp'] = df['Message'].str.split(n=1).str[0]
@@ -83,8 +85,7 @@ def lambda_handler(event, context):
         df['Date'] = df['Date'].str.strip('(') + '/2024'
         df['Timestamp'] = pd.to_datetime(df['Date'] + ' ' + df['Time'], format='%d/%m/%Y %H:%M')
         df['Time'] = pd.to_datetime(df['Time'], format='%H:%M')
-        print(df)
-        
+
         bins = create_bins(df)
         filtered_df = drop_duplicates_from_bins(df, bins)
         filtered_df = filtered_df.drop(columns=['Date', 'Time'])
