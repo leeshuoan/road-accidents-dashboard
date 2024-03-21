@@ -12,8 +12,7 @@
   "dependencies": {
     "@react-google-maps/api": "^2.19.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-twitter-embed": "^4.0.4"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.8",

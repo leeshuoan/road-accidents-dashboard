@@ -21,16 +21,14 @@ function Map({ trafficLayerVisible, mapKey, center, accidentData }: MapProps) {
   return (
     <>
       <LoadScript googleMapsApiKey="AIzaSyCKEnQUKG9So2z23TYtvfUiFBahgWwzvRc">
-        {/* TODO: Last Updated: XX:XX:XX?
-        Button to refresh and fetch new data and re-render map? */}
-        <div id="map" className="h-[700px] w-full">
+        <div id="map" className="h-[500px] w-full">
           <GoogleMap
             key={mapKey}
             mapContainerStyle={{
               height: "100%",
               width: "100%",
             }}
-            zoom={12}
+            zoom={11.5}
             center={center}
           >
             {accidentData.map((accident, index) => (
