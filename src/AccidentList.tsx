@@ -8,7 +8,7 @@ const AccidentList = ({ accidentData }: { accidentData: AccidentData[] }) => {
 
   return (
     <div>
-      <p className="font-bold">Latest Accidents</p>
+      <p className="font-bold text-lg">Latest Accidents</p>
 
       {accidentData.length === 0 ? (
         <div role="status">

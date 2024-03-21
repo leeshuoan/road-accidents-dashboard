@@ -66,9 +66,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="text-2xl text-center font-bold mb-5">
-        Road Accidents in Singapore
-      </div>
       <div className="lg:flex space-between gap-5">
         <div className="w-full">
           <Map
@@ -133,7 +130,7 @@ const Dashboard = () => {
           <div className="hidden lg:block text-2xl font-bold text-red-500">
             Live Accidents
           </div>
-          <div className="hidden lg:block text-sm text-gray-500 italic mb-4">
+          <div className="hidden lg:block text-xs text-gray-500 italic mb-4">
             Last Updated: {new Date().toLocaleString()}
           </div>
           <AccidentList accidentData={accidentData} />
