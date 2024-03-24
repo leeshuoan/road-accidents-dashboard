@@ -50,7 +50,7 @@ const AccidentTimings = ({ accidentData }: {accidentData: AccidentData[]}) => {
       tooltip: {
         enabled: true,
         x: {
-          formatter: function(value) {
+          formatter: function(value: number) {
             const intervalStart = new Date(value);
             const intervalEnd = new Date(value + (4 * 60 * 60 * 1000)); // Add 4 hours
             const startHour = intervalStart.getHours();
@@ -59,7 +59,7 @@ const AccidentTimings = ({ accidentData }: {accidentData: AccidentData[]}) => {
           }
         },
         y: {
-          formatter: function (value) {
+          formatter: function (value: number) {
             return value + " accidents";
           }
         }
