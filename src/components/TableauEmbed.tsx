@@ -14,7 +14,7 @@ function TableauEmbed({ url }: { url: string }) {
 
   return (
     <>
-      <div ref={ref}></div>
+      <div ref={ref} className="shadow-xl"></div>
     </>
   );
 }

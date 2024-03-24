@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Map from "./Map";
 import AccidentList from "./AccidentList";
-import TableauEmbed from "./TableauEmbed";
+import AccidentTimings from "../AccidentTimings";
 
 interface AccidentData {
   Type: string;
@@ -60,6 +60,7 @@ const Dashboard = () => {
       .then((response) => response.json())
       .then((data) => {
         setAccidentData(data);
+        console.log(accidentData);
         setMapData(data);
       });
   }, []);
@@ -74,7 +75,7 @@ const Dashboard = () => {
             center={center}
             accidentData={mapData}
           />
-          <div className="mb-2 mt-2 flex align-middle">
+          <div className="mb-2 mt-2 flex">
             <p className="mr-2">Filter:</p>
             <select
               className="block border-gray-400 rounded-md shadow-sm"
@@ -136,9 +137,7 @@ const Dashboard = () => {
           <AccidentList accidentData={accidentData} />
         </div>
       </div>
-      <div className="mt-5">
-        <TableauEmbed url="https://public.tableau.com/views/justtry_map/Map?:language=en-GB&amp;&:embed=true&publish=yes;:showVizHome%3Dno&:sid=&:display_count=n&:origin=viz_share_link" />
-      </div>
+      <AccidentTimings accidentData={accidentData}/>
     </>
   );
 };

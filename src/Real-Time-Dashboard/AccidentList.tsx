@@ -15,7 +15,7 @@ const AccidentList = ({ accidentData }: { accidentData: AccidentData[] }) => {
           <div className="flex">
             <svg
               aria-hidden="true"
-              className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+              className="w-8 h-8 text-gray-200 animate-spin fill-blue-600"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -35,11 +35,11 @@ const AccidentList = ({ accidentData }: { accidentData: AccidentData[] }) => {
           <span className="sr-only">Fetching Data...</span>
         </div>
       ) : (
-        <table className="w-full text-sm text-left shadow-md rtl:text-right text-gray-500 dark:text-gray-400">
+        <table className="w-full text-sm text-left shadow-md rtl:text-right text-gray-500">
           <tbody>
             {latestAccidents.map((accident, index) => (
               <tr
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100"
+                className="bg-white border-b hover:bg-gray-100 hover:text-black"
                 tabIndex={index}
               >
                 <td className="pl-2 py-2 w-24">
