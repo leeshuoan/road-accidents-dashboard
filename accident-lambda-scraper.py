@@ -10,6 +10,7 @@ from io import BytesIO
 def lambda_handler(event, context):
     s3_bucket = 'visualanalyticsdataset'
     s3_key = 'traffic_data.csv'
+    bin_number = 5
 
     s3 = boto3.client('s3')
     
@@ -17,9 +18,9 @@ def lambda_handler(event, context):
         similarity = SequenceMatcher(None, a, b).ratio()
         return similarity > 0.85
     
-    def create_bins(df):
+    def create_bins(df, bin_number):
         bins = []
-        for i in range(len(df)):
+        for i in range(len(df)-bin_number, len(df)):
             found_bin = False
             for bin_indices in bins:
                 if is_similar(df.loc[i, 'Message'], df.loc[bin_indices[0], 'Message']):
@@ -73,6 +74,9 @@ def lambda_handler(event, context):
             for item in response_data["value"]
             if item["Type"] == "Accident"
         ]
+        bin_number += len(formatted_data)
+        print(formatted_data)
+        print(bin_number)
 
         response_df = pd.DataFrame(formatted_data)
         df = pd.concat([existing_df, response_df], ignore_index=True)
@@ -86,7 +90,10 @@ def lambda_handler(event, context):
         df['Timestamp'] = pd.to_datetime(df['Date'] + ' ' + df['Time'], format='%d/%m/%Y %H:%M')
         df['Time'] = pd.to_datetime(df['Time'], format='%H:%M')
 
-        bins = create_bins(df)
+        bins = create_bins(df, bin_number)
+        for i, bin_indices in enumerate(bins):
+            bin_messages = [df.loc[idx, 'Message'] for idx in bin_indices]
+            print(f"Messages in bin {i+1}: {bin_messages}")
         filtered_df = drop_duplicates_from_bins(df, bins)
         filtered_df = filtered_df.drop(columns=['Date', 'Time'])
 

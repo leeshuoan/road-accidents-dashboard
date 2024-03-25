@@ -21,7 +21,7 @@ function Map({ trafficLayerVisible, mapKey, center, accidentData }: MapProps) {
   return (
     <>
       <LoadScript googleMapsApiKey="AIzaSyCKEnQUKG9So2z23TYtvfUiFBahgWwzvRc">
-        <div id="map" className="h-[500px] w-full">
+        <div id="map" className="h-[500px] w-full shadow-md">
           <GoogleMap
             key={mapKey}
             mapContainerStyle={{
