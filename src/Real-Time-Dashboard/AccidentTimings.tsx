@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import ApexCharts from 'apexcharts';
-import { AccidentData } from './Real-Time-Dashboard/Dashboard';
+import { AccidentData } from './Dashboard';
 
 const AccidentTimings = ({ accidentData }: {accidentData: AccidentData[]}) => {
   const chartRef = useRef(null);

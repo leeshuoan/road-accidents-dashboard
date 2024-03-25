@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Map from "./Map";
 import AccidentList from "./AccidentList";
-import AccidentTimings from "../AccidentTimings";
+import AccidentTimings from "./AccidentTimings";
 
 interface AccidentData {
   Type: string;
