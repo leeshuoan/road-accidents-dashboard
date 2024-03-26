@@ -128,7 +128,7 @@ const Dashboard = () => {
         </div>
 
         <div className="lg:w-1/2">
-          <div className="hidden lg:block text-2xl font-bold text-red-500">
+          <div className="hidden lg:block text-2xl font-bold text-red-600">
             Live Accidents
           </div>
           <div className="hidden lg:block text-xs text-gray-500 italic mb-4">

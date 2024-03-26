@@ -118,7 +118,7 @@ const AccidentTimings = ({
         type: "line",
         height: 400,
       },
-      colors: ["#EF4444"],
+      colors: ["#DC2638"],
       series: [
         {
           name: "Number of Accidents",
