@@ -1,7 +1,7 @@
 const Navbar = () => {
   return (
     <>
-      <nav className="pt-5 mb-5 bg-[#eaeae9] bg-opacity-90 sticky top-0 grid grid-cols-3 z-50">
+      <nav className="pt-5 pb-5 bg-[#eaeae9] bg-opacity-90 sticky top-0 grid grid-cols-3 z-50">
         <div className="text-xl font-bold col-span-1">
           Road Accidents Singapore
         </div>

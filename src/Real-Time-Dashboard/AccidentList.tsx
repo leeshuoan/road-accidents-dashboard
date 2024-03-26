@@ -41,6 +41,7 @@ const AccidentList = ({ accidentData }: { accidentData: AccidentData[] }) => {
               <tr
                 className="bg-white border-b hover:bg-gray-100 hover:text-black"
                 tabIndex={index}
+                key={index}
               >
                 <td className="pl-2 py-2 w-24">
                   {(() => {

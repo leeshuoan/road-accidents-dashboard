@@ -32,6 +32,7 @@ const AccidentTimings = ({ accidentData }: {accidentData: AccidentData[]}) => {
         type: 'line',
         height: 400,
       },
+      colors: ['#EF4444'],
       series: [{
         name: 'Number of Accidents',
         data: data,
