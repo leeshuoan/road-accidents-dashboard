@@ -54,7 +54,7 @@ function Map({ trafficLayerVisible, mapKey, center, accidentData }: MapProps) {
                   lat: accidentData[selectedMarker].Latitude,
                   lng: accidentData[selectedMarker].Longitude,
                 }}
-                options={{ pixelOffset: new window.google.maps.Size(0, -35) }}
+                options={{ pixelOffset: new window.google.maps.Size(0, -25) }}
                 onCloseClick={() => setSelectedMarker(null)}
               >
                 <div>
