@@ -7,6 +7,7 @@ import {
   TrafficLayerF,
   InfoWindowF,
 } from "@react-google-maps/api";
+import pin from "../assets/pin.png";
 
 interface MapProps {
   trafficLayerVisible: boolean;
@@ -34,6 +35,10 @@ function Map({ trafficLayerVisible, mapKey, center, accidentData }: MapProps) {
             {accidentData.map((accident, index) => (
               <MarkerF
                 key={index}
+                icon={{
+                  url: pin,
+                  scaledSize: new window.google.maps.Size(25, 25), 
+                }}
                 position={{ lat: accident.Latitude, lng: accident.Longitude }}
                 title="Accident"
                 onMouseOver={() => {
