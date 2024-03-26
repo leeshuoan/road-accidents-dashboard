@@ -1,25 +1,48 @@
-import { useEffect, useRef } from 'react';
-import ApexCharts from 'apexcharts';
-import { AccidentData } from './Dashboard';
+import { useEffect, useRef } from "react";
+import ApexCharts from "apexcharts";
+import { AccidentData } from "./Dashboard";
 
-const AccidentTimings = ({ accidentData }: {accidentData: AccidentData[]}) => {
+const AccidentTimings = ({
+  accidentData,
+}: {
+  accidentData: AccidentData[];
+}) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
     if (!accidentData.length || !chartRef.current) return;
 
-    const getIntervalStart = (timestamp: string): number => {
+    const getIntervalStart = (timestamp: string): string => {
       const date = new Date(timestamp);
       const hour = date.getHours();
-      const intervalStartHour = hour - (hour % 4);
-      date.setHours(intervalStartHour, 0, 0, 0);
-      return date.getTime();
+      const intervalStartHour = hour - (hour % 2);
+      return `${intervalStartHour < 10 ? '0' + intervalStartHour : intervalStartHour}:00-${intervalStartHour + 2 < 10 ? '0' + (intervalStartHour + 2) : intervalStartHour + 2}:00`;
     };
 
-    const intervalDataMap = new Map<number, number>();
+    const intervals = [
+      "00:00-02:00",
+      "02:00-04:00",
+      "04:00-06:00",
+      "06:00-08:00",
+      "08:00-10:00",
+      "10:00-12:00",
+      "12:00-14:00",
+      "14:00-16:00",
+      "16:00-18:00",
+      "18:00-20:00",
+      "20:00-22:00",
+      "22:00-00:00",
+    ]
+
+    const intervalDataMap = new Map<string, number>(); 
+    intervals.forEach((interval) => intervalDataMap.set(interval, 0));
+
     accidentData.forEach((d) => {
       const intervalStart = getIntervalStart(d.Timestamp);
-      intervalDataMap.set(intervalStart, (intervalDataMap.get(intervalStart) || 0) + 1);
+      intervalDataMap.set(
+        intervalStart,
+        (intervalDataMap.get(intervalStart) || 0) + 1
+      );
     });
 
     const data = Array.from(intervalDataMap.entries()).map(([time, count]) => ({
@@ -29,42 +52,28 @@ const AccidentTimings = ({ accidentData }: {accidentData: AccidentData[]}) => {
 
     const options = {
       chart: {
-        type: 'line',
+        type: "line",
         height: 400,
       },
-      colors: ['#EF4444'],
-      series: [{
-        name: 'Number of Accidents',
-        data: data,
-      }],
+      colors: ["#EF4444"],
+      series: [
+        {
+          name: "Number of Accidents",
+          data: data,
+        },
+      ],
       xaxis: {
-        type: 'datetime',
-        labels: {
-          datetimeFormatter: {
-            year: 'yyyy',
-            month: 'MMM \'yy',
-            day: 'dd MMM',
-            hour: 'HH:mm',
-          }
-        }
+        type: "category", 
+        categories: Array.from(intervalDataMap.keys()), 
       },
       tooltip: {
         enabled: true,
-        x: {
-          formatter: function(value: number) {
-            const intervalStart = new Date(value);
-            const intervalEnd = new Date(value + (4 * 60 * 60 * 1000)); // Add 4 hours
-            const startHour = intervalStart.getHours();
-            const endHour = intervalEnd.getHours();
-            return `${intervalStart.toDateString()} ${startHour}:00 - ${endHour}:00`;
-          }
-        },
         y: {
           formatter: function (value: number) {
             return value + " accidents";
-          }
-        }
-      }
+          },
+        },
+      },
     };
 
     const chart = new ApexCharts(chartRef.current, options);
@@ -77,7 +86,7 @@ const AccidentTimings = ({ accidentData }: {accidentData: AccidentData[]}) => {
 
   return (
     <div>
-      <p className='text-l font-bold mt-8'>ACCIDENTS BY TIME OF DAY</p>
+      <p className="text-l font-bold mt-8">ACCIDENTS BY TIME OF DAY</p>
       <div ref={chartRef}></div>
     </div>
   );
