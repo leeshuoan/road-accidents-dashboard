@@ -14,11 +14,13 @@ function TableauEmbed({ url }: { url: string }) {
 
   return (
     <>
-      <div
-        ref={ref}
-        className="shadow-xl"
-        style={{ width: "1366px", height: "768px" }} // Set width and height inline styles
-      ></div>
+      <div className="flex justify-center">
+        <div
+          ref={ref}
+          className="shadow-xl"
+          style={{ width: "1366px", height: "768px" }} // Set width and height inline styles
+        ></div>
+      </div>
     </>
   );
 }
