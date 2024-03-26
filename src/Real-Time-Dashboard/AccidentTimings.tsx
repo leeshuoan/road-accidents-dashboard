@@ -33,7 +33,7 @@ const AccidentTimings = ({
             ? "0" + (intervalStartHour + 2)
             : intervalStartHour + 2
         }:00`;
-      } else if (granularity === "4-hour") {
+      } else {
         intervalStartHour = hour - (hour % 4);
         return `${
           intervalStartHour < 10 ? "0" + intervalStartHour : intervalStartHour
@@ -42,8 +42,7 @@ const AccidentTimings = ({
             ? "0" + (intervalStartHour + 4)
             : intervalStartHour + 4
         }:00`;
-      } else {
-      }
+      } 
     };
 
     const intervals: string[] =
