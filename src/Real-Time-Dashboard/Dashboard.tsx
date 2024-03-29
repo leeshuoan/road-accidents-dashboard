@@ -54,7 +54,7 @@ const Dashboard = () => {
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
     return accidentDate >= fourteenDaysAgo && accidentDate < sevenDaysAgo;
   });
-  
+
   const filterAccidentsByTimeRange = (timeRange: string) => {
     setTimeRange(timeRange);
     let filteredData: AccidentData[] = [];
@@ -87,7 +87,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="bg-[#F2F2F2] shadow-sm">
-        <div className="lg:flex space-between gap-5 pt-10 pb-5 mx-auto w-11/12">
+        <div className="lg:flex space-between gap-5 pt-10 pb-8 mx-auto w-11/12">
           <div className="w-full">
             <Map
               trafficLayerVisible={trafficLayerVisible}
@@ -96,16 +96,38 @@ const Dashboard = () => {
               accidentData={mapData}
             />
             <div className="mt-2 flex">
-              <p className="mr-2">Filter:</p>
-              <select
-                className="block border-gray-400 rounded-md shadow-sm"
-                value={timeRange}
-                onChange={(e) => filterAccidentsByTimeRange(e.target.value)}
-              >
-                <option value="all">All Time</option>
-                <option value="7d">Past 7 Days</option>
-                <option value="24h">Past 24 Hours</option>
-              </select>
+              <div className="flex">
+                <button
+                  className={`py-1 px-4 shadow-sm border border-r-0 ${
+                    timeRange === "all"
+                      ? "bg-red-600 text-white"
+                      : "border-gray-300"
+                  }`}
+                  onClick={() => filterAccidentsByTimeRange("all")}
+                >
+                  All Time
+                </button>
+                <button
+                  className={`py-1 px-4 shadow-sm border border-r-0 ${
+                    timeRange === "7d"
+                      ? "bg-red-600 text-white"
+                      : "border-gray-300"
+                  }`}
+                  onClick={() => filterAccidentsByTimeRange("7d")}
+                >
+                  Past 7 Days
+                </button>
+                <button
+                  className={`py-1 px-4 shadow-sm border ${
+                    timeRange === "24h"
+                      ? "bg-red-600 text-white"
+                      : "border-gray-300"
+                  }`}
+                  onClick={() => filterAccidentsByTimeRange("24h")}
+                >
+                  Past 24 Hours
+                </button>
+              </div>
               <div className="ml-4 inline-flex items-center">
                 <label
                   className="relative flex items-center rounded-full cursor-pointer"
@@ -150,7 +172,7 @@ const Dashboard = () => {
             <div className="hidden lg:block text-3xl font-bold text-red-600">
               Live Accidents
             </div>
-            <div className="hidden lg:block text-sm text-gray-500 italic mb-4">
+            <div className="hidden lg:block text-sm text-gray-500 mb-4">
               Last Updated: {new Date().toLocaleString()}
             </div>
             <AccidentList accidentData={accidentData} />
@@ -161,7 +183,7 @@ const Dashboard = () => {
       <div className="bg-[#F2F2F2]">
         <hr className="border-t-1 border-gray-300" />
 
-        <div className="pt-5 pb-2 mx-auto w-11/12 flex gap-5">
+        <div className="pt-8 pb-2 mx-auto w-11/12 flex gap-5">
           <div className="bg-[#FCFCFC] p-5 shadow-lg rounded-md w-2/12 flex flex-col justify-between">
             <div>
               <p className="font-bold text-lg">NUMBER OF ACCIDENTS</p>
@@ -171,35 +193,43 @@ const Dashboard = () => {
             </div>
             <div>
               <p className="text-gray-500 text-sm pt-3">PAST WEEK</p>
-              <p className="font-bold text-5xl">
-                {lastSevenDaysData.length}
-              </p>
+              <p className="font-bold text-5xl">{lastSevenDaysData.length}</p>
               {lastWeekData.length > lastSevenDaysData.length ? (
                 <div className="text-green-600 text-sm flex opacity-90">
                   <span>&#9660;&nbsp;</span>
-                  <p>{lastWeekData.length - lastSevenDaysData.length} from the previous week</p>
+                  <p>
+                    {lastWeekData.length - lastSevenDaysData.length} from the
+                    previous week
+                  </p>
                 </div>
               ) : (
                 <div className="text-red-500 text-sm flex opacity-80">
                   <span>&#9650;&nbsp;</span>
-                  <p>{lastSevenDaysData.length - lastWeekData.length} from the previous week</p>
+                  <p>
+                    {lastSevenDaysData.length - lastWeekData.length} from the
+                    previous week
+                  </p>
                 </div>
               )}
             </div>
-            <div className="pb-5">
+            <div className="pb-8">
               <p className="text-gray-500 text-sm pt-3">TODAY</p>
-              <p className="font-bold text-5xl">
-                {twentyFourHourData.length}
-              </p>
+              <p className="font-bold text-5xl">{twentyFourHourData.length}</p>
               {yesterdayData.length > twentyFourHourData.length ? (
                 <div className="text-green-600 text-sm flex opacity-90">
                   <span>&#9660;&nbsp;</span>
-                  <p>{yesterdayData.length - twentyFourHourData.length} from yesterday</p>
+                  <p>
+                    {yesterdayData.length - twentyFourHourData.length} from
+                    yesterday
+                  </p>
                 </div>
               ) : (
                 <div className="text-red-500 text-sm flex opacity-80">
                   <span>&#9650;&nbsp;</span>
-                  <p>{twentyFourHourData.length - yesterdayData.length} from yesterday</p>
+                  <p>
+                    {twentyFourHourData.length - yesterdayData.length} from
+                    yesterday
+                  </p>
                 </div>
               )}
             </div>
