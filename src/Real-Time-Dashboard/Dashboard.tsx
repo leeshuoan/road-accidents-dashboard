@@ -32,13 +32,29 @@ const Dashboard = () => {
     return new Date().getTime() - accidentDate.getTime() <= 24 * 60 * 60 * 1000;
   });
 
-  const lastSevenWeeksData = accidentData.filter((accident) => {
+  const yesterdayData = accidentData.filter((accident) => {
+    const accidentDate = new Date(accident.Timestamp);
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return accidentDate.toDateString() === yesterday.toDateString();
+  });
+
+  const lastSevenDaysData = accidentData.filter((accident) => {
     const accidentDate = new Date(accident.Timestamp);
     return (
       new Date().getTime() - accidentDate.getTime() <= 7 * 24 * 60 * 60 * 1000
     );
   });
 
+  const lastWeekData = accidentData.filter((accident) => {
+    const accidentDate = new Date(accident.Timestamp);
+    const fourteenDaysAgo = new Date();
+    fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    return accidentDate >= fourteenDaysAgo && accidentDate < sevenDaysAgo;
+  });
+  
   const filterAccidentsByTimeRange = (timeRange: string) => {
     setTimeRange(timeRange);
     let filteredData: AccidentData[] = [];
@@ -47,7 +63,7 @@ const Dashboard = () => {
         filteredData = twentyFourHourData;
         break;
       case "7d":
-        filteredData = lastSevenWeeksData;
+        filteredData = lastSevenDaysData;
         break;
       default:
         filteredData = accidentData;
@@ -70,7 +86,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="bg-[#F2F2F2] shadow-md">
+      <div className="bg-[#F2F2F2] shadow-sm">
         <div className="lg:flex space-between gap-5 pt-10 pb-5 mx-auto w-11/12">
           <div className="w-full">
             <Map
@@ -79,7 +95,7 @@ const Dashboard = () => {
               center={center}
               accidentData={mapData}
             />
-            <div className="mb-2 mt-2 flex">
+            <div className="mt-2 flex">
               <p className="mr-2">Filter:</p>
               <select
                 className="block border-gray-400 rounded-md shadow-sm"
@@ -141,26 +157,59 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="mx-auto w-11/12">
-        <p className="mt-5 mb-2 font-bold text-lg">NUNBER OF ACCIDENTS</p>
-        <div className="flex items-center">
-          <div>
-            <p className="font-bold text-6xl">{accidentData.length}</p>
-            <p className="text-gray-500 text-center text-sm">total count</p>
+
+      <div className="bg-[#F2F2F2]">
+        <hr className="border-t-1 border-gray-300" />
+
+        <div className="pt-5 pb-2 mx-auto w-11/12 flex gap-5">
+          <div className="bg-[#FCFCFC] p-5 shadow-lg rounded-md w-2/12 flex flex-col justify-between">
+            <div>
+              <p className="font-bold text-lg">NUMBER OF ACCIDENTS</p>
+
+              <p className="text-gray-500 text-sm pt-8">TOTAL COUNT</p>
+              <p className="font-bold text-5xl">{accidentData.length}</p>
+            </div>
+            <div>
+              <p className="text-gray-500 text-sm pt-3">PAST WEEK</p>
+              <p className="font-bold text-5xl">
+                {lastSevenDaysData.length}
+              </p>
+              {lastWeekData.length > lastSevenDaysData.length ? (
+                <div className="text-green-600 text-sm flex opacity-90">
+                  <span>&#9660;&nbsp;</span>
+                  <p>{lastWeekData.length - lastSevenDaysData.length} from the previous week</p>
+                </div>
+              ) : (
+                <div className="text-red-500 text-sm flex opacity-80">
+                  <span>&#9650;&nbsp;</span>
+                  <p>{lastSevenDaysData.length - lastWeekData.length} from the previous week</p>
+                </div>
+              )}
+            </div>
+            <div className="pb-5">
+              <p className="text-gray-500 text-sm pt-3">TODAY</p>
+              <p className="font-bold text-5xl">
+                {twentyFourHourData.length}
+              </p>
+              {yesterdayData.length > twentyFourHourData.length ? (
+                <div className="text-green-600 text-sm flex opacity-90">
+                  <span>&#9660;&nbsp;</span>
+                  <p>{yesterdayData.length - twentyFourHourData.length} from yesterday</p>
+                </div>
+              ) : (
+                <div className="text-red-500 text-sm flex opacity-80">
+                  <span>&#9650;&nbsp;</span>
+                  <p>{twentyFourHourData.length - yesterdayData.length} from yesterday</p>
+                </div>
+              )}
+            </div>
           </div>
-          <div className="h-20 ml-6 mr-5 border-l border-gray-500">&nbsp;</div>
-          <div>
-            <p className="font-bold text-6xl">{lastSevenWeeksData.length}</p>
-            <p className="text-gray-500 text-center text-sm">past week</p>
-          </div>
-          <div className="h-20 ml-6 mr-5 border-l border-gray-500">&nbsp;</div>
-          <div>
-            <p className="font-bold text-6xl">{twentyFourHourData.length}</p>
-            <p className="text-gray-500 text-center text-sm">today</p>
+          <div className="bg-[#FCFCFC] rounded-md w-10/12">
+            <AccidentTimings accidentData={accidentData} />
           </div>
         </div>
-        <AccidentTimings accidentData={accidentData} />
       </div>
+      <div className="bg-[#F2F2F2] h-10"></div>
     </>
   );
 };

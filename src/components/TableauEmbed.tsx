@@ -16,7 +16,7 @@ function TableauEmbed({ url }: { url: string }) {
     <>
       <div
         ref={ref}
-        className="shadow-xl"
+        className="shadow-xl pb-6"
         style={{ width: "1200px", height: "800px" }}
       ></div>
     </>

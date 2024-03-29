@@ -31,7 +31,7 @@ const Navbar = () => {
               ></span>
             </NavLink>
             <NavLink
-              to="/accidentanalysis"
+              to="/accident-analysis"
               className={({ isActive }) =>
                 isActive
                   ? "relative group text-red-600"
@@ -45,7 +45,7 @@ const Navbar = () => {
               Accident Analysis
             </NavLink>
             <NavLink
-              to="/publictransportanalysis"
+              to="/public-transport-analysis"
               className={({ isActive }) =>
                 isActive
                   ? "relative group text-red-600"

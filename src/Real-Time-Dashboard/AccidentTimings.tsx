@@ -158,8 +158,8 @@ const AccidentTimings = ({
   };
 
   return (
-    <div>
-      <p className="text-lg font-bold mt-8">ACCIDENTS BY TIME OF DAY</p>
+    <div className="shadow-lg p-5">
+      {/* <p className="text-lg font-bold">ACCIDENTS BY TIME OF DAY</p> */}
       <div className="flex items-center">
         <div className="flex">
           <button
