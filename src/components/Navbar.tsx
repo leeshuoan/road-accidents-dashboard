@@ -5,11 +5,11 @@ const Navbar = () => {
   return (
     <>
       <nav className="pt-4 pb-4 bg-white bg-opacity-90 sticky top-0 shadow-md z-50">
-        <div className="mx-auto w-11/12 grid grid-cols-3">
-          <div className="flex items-center text-xl font-bold col-span-1">
+        <div className="mx-auto w-11/12 flex justify-center items-center relative">
+          <div className="absolute left-0 flex items-center text-xl font-bold h-full">
             <img
               src={Singapore}
-              className="border-black"
+              className="border-black shadow-sm"
               alt="Singapore Image"
               width={30}
             />

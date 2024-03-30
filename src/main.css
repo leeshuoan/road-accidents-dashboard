@@ -2,8 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-  font-family: "Gilroy", sans-serif; 
-  font-feature-settings: "lnum" 1;
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/Mark\ Simonson\ \ Proxima\ Nova\ Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/Mark\ Simonson\ \ Proxima\ Nova\ Regular\ Italic.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/Mark\ Simonson\ \ Proxima\ Nova\ Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/Mark\ Simonson\ \ Proxima\ Nova\ Semibold\ Italic.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/Mark\ Simonson\ \ Proxima\ Nova\ Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/Mark\ Simonson\ \ Proxima\ Nova\ Bold\ Italic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  scroll-behavior: smooth;
+  font-family: "Proxima Nova", sans-serif;
+}
+
+

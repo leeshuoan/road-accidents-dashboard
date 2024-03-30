@@ -98,7 +98,7 @@ const Dashboard = () => {
             <div className="mt-2 flex">
               <div className="flex">
                 <button
-                  className={`py-1 px-4 shadow-sm border border-r-0 ${
+                  className={`py-1 px-4 shadow-sm border border-r-0 text-sm ${
                     timeRange === "all"
                       ? "bg-red-600 text-white"
                       : "border-gray-300"
@@ -108,7 +108,7 @@ const Dashboard = () => {
                   All Time
                 </button>
                 <button
-                  className={`py-1 px-4 shadow-sm border border-r-0 ${
+                  className={`py-1 px-4 shadow-sm border border-r-0 text-sm ${
                     timeRange === "7d"
                       ? "bg-red-600 text-white"
                       : "border-gray-300"
@@ -118,7 +118,7 @@ const Dashboard = () => {
                   Past 7 Days
                 </button>
                 <button
-                  className={`py-1 px-4 shadow-sm border ${
+                  className={`py-1 px-4 shadow-sm border text-sm ${
                     timeRange === "24h"
                       ? "bg-red-600 text-white"
                       : "border-gray-300"
@@ -135,7 +135,7 @@ const Dashboard = () => {
                 >
                   <input
                     type="checkbox"
-                    className="before:content[''] bg-white border-gray-400 peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-9 before:w-9 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
+                    className="before:content[''] bg-white border-gray-400 peer relative h-4 w-4 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-9 before:w-9 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
                     id="check"
                     checked={trafficLayerVisible}
                     onChange={toggleTrafficLayer}
@@ -158,7 +158,7 @@ const Dashboard = () => {
                   </span>
                 </label>
                 <label
-                  className="mt-px pl-1 font-light text-gray-700 cursor-pointer select-none"
+                  className="mt-px pl-1 font-light text-sm text-gray-700 cursor-pointer select-none"
                   htmlFor="check"
                 >
                   {trafficLayerVisible
@@ -199,7 +199,7 @@ const Dashboard = () => {
                   <span>&#9660;&nbsp;</span>
                   <p>
                     {lastWeekData.length - lastSevenDaysData.length} from the
-                    previous week
+                    week before
                   </p>
                 </div>
               ) : (
@@ -207,7 +207,7 @@ const Dashboard = () => {
                   <span>&#9650;&nbsp;</span>
                   <p>
                     {lastSevenDaysData.length - lastWeekData.length} from the
-                    previous week
+                    week before
                   </p>
                 </div>
               )}
