@@ -76,7 +76,7 @@ const RoadAccidentsInsights = () => {
           </div>
           <TableauEmbed
             url="https://public.tableau.com/views/dynamic_17113649522640/Dashboard?:language=en-GB&publish=yes&:sid=&:display_count=n&:origin=viz_share_link"
-            width="1000px"
+            width="2000px"
             height="700px"
           />
         </div>
@@ -86,7 +86,7 @@ const RoadAccidentsInsights = () => {
         <div className="mt-10 flex gap-5 justify-between w-11/12 mx-auto">
           <TableauEmbed
             url="https://public.tableau.com/views/Visualisations_17110383019890/TrafficAccidentsDashboard?:language=en-GB&:sid=&:display_count=n&:origin=viz_share_link"
-            width="1000px"
+            width="2000px"
             height="700px"
           />
           <div>
