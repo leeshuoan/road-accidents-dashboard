@@ -113,14 +113,14 @@ const RoadAccidentsInsights = () => {
             </div>
 
             <div className="flex">
-              <p className="mb-2 text-md font-semibold">
-                Motorcyclists and Pillion Riders make up majority of Accident
+              <p className="mb-2 text-lg font-semibold">
+                Motorcyclists & Pillion Riders make up majority of Accident
                 Fatalities & Injuries
               </p>
               <img src={Motorcycle} width={70} />
             </div>
             <div className="mb-14">
-              <table className="w-full text-sm text-center shadow-lg rtl:text-right text-gray-500">
+              <table className="w-full text-center shadow-lg rtl:text-right text-gray-500">
                 <thead>
                   <tr className="text-base bg-gray-200 border-b text-black">
                     <th></th>
