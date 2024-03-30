@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 const { tableau } = window as any;
 
-function TableauEmbed({ url }: { url: string }) {
+function TableauEmbed({ url, width, height }: { url: string, width: string, height: string }) {
   const ref = useRef(null);
 
   function initViz() {
@@ -17,7 +17,7 @@ function TableauEmbed({ url }: { url: string }) {
       <div
         ref={ref}
         className="shadow-xl pb-6"
-        style={{ width: "1200px", height: "800px" }}
+        style={{ width: width, height: height }}
       ></div>
     </>
   );

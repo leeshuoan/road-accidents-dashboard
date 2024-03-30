@@ -1,6 +1,5 @@
 import TableauEmbed from "../components/TableauEmbed";
 import MorningRush from "../assets/morning-rush.svg";
-import Motorcycle from "../assets/motorcycle.svg";
 
 const RoadAccidentsInsights = () => {
   return (
@@ -51,11 +50,11 @@ const RoadAccidentsInsights = () => {
               </div>
             </div>
 
-            <p className="mb-2 text-md text-gray-600">
-              When are accidents most frequent?
-            </p>
-            <div className="mb-14 flex gap-1 justify-between">
+            <div className="mb-14 flex gap-1">
               <div>
+                <p className="mb-2 text-md text-gray-600">
+                  When are accidents most frequent?
+                </p>
                 <p className="text-2xl font-semibold">Monday</p>
                 <p className="mb-1 text-2xl font-semibold">8 AM - 9 AM</p>
                 <p className="text-sm text-gray-600">
@@ -75,15 +74,23 @@ const RoadAccidentsInsights = () => {
               <p className="text-gray-600">6 PM - 7 PM</p>
             </div>
           </div>
-          <TableauEmbed url="https://public.tableau.com/views/dynamic_17113649522640/Dashboard?:language=en-GB&publish=yes&:sid=&:display_count=n&:origin=viz_share_link" />
+          <TableauEmbed
+            url="https://public.tableau.com/views/dynamic_17113649522640/Dashboard?:language=en-GB&publish=yes&:sid=&:display_count=n&:origin=viz_share_link"
+            width="1000px"
+            height="700px"
+          />
         </div>
 
         <hr className="mt-16 border-t-1 border-gray-300" />
 
         <div className="mt-10 flex gap-5 justify-between w-11/12 mx-auto">
-          <TableauEmbed url="https://public.tableau.com/views/Visualisations_17110383019890/TrafficAccidentsDashboard?:language=en-GB&:sid=&:display_count=n&:origin=viz_share_link" />
+          <TableauEmbed
+            url="https://public.tableau.com/views/Visualisations_17110383019890/TrafficAccidentsDashboard?:language=en-GB&:sid=&:display_count=n&:origin=viz_share_link"
+            width="1000px"
+            height="700px"
+          />
           <div>
-            <p className="mb-2 text-2xl font-bold">Accident Statistics</p>
+            <p className="text-2xl font-bold">Accident Statistics</p>
             <p className="mb-14 text-lg text-gray-600">
               The number of accidents yearly has been steadily increasing since
               the covid pandemic in 2020
@@ -94,7 +101,7 @@ const RoadAccidentsInsights = () => {
             </p>
             <div className="mb-14">
               <span className="text-3xl font-semibold">Motor Cars</span>
-              <div className="text-sm mb-2">
+              <div className="text-sm mb-3">
                 <span className="pb-1 text-gray-500">Average of</span>
                 <span className="text-red-600 font-semibold">&nbsp;20.5</span>
                 <span className="pb-1 text-gray-500">
@@ -103,7 +110,7 @@ const RoadAccidentsInsights = () => {
               </div>
 
               <span className="text-xl">Motorcycles & Scooters</span>
-              <div className="text-xs">
+              <div className="text-sm">
                 <span className="pb-1 text-gray-500">Average of</span>
                 <span className="text-red-600 font-semibold">&nbsp;11.2</span>
                 <span className="pb-1 text-gray-500">
@@ -112,14 +119,10 @@ const RoadAccidentsInsights = () => {
               </div>
             </div>
 
-            <div className="flex">
-              <p className="mb-2 text-lg font-semibold">
-                Motorcyclists & Pillion Riders make up majority of Accident
-                Fatalities & Injuries
-              </p>
-              <img src={Motorcycle} width={70} />
-            </div>
-            <div className="mb-14">
+            <p className="mb-2 text-md text-gray-600">
+              Which demographic is the most likely to result in fatalities or injuries?
+            </p>
+            <div className="mb-3">
               <table className="w-full text-center shadow-lg rtl:text-right text-gray-500">
                 <thead>
                   <tr className="text-base bg-gray-200 border-b text-black">
@@ -136,13 +139,13 @@ const RoadAccidentsInsights = () => {
                   </tr>
                   <tr className="bg-white border-b hover:bg-gray-100 hover:text-black">
                     <td className="pl-1">2.</td>
-                    <td>Pedestrian</td>
+                    <td>Pedestrians</td>
                     <td>Motor Cars</td>
                   </tr>
                   <tr className="bg-white border-b hover:bg-gray-100 hover:text-black">
                     <td className="pl-1">3.</td>
                     <td>Motor Cars</td>
-                    <td>Pedestrian</td>
+                    <td>Pedestrians</td>
                   </tr>
                 </tbody>
               </table>
