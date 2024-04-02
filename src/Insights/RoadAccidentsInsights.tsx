@@ -110,7 +110,7 @@ const RoadAccidentsInsights = () => {
             <p className="mb-2 text-3xl text-red-600 font-bold">
               Accident Patterns
             </p>
-            <p className="mb-14 text-lg text-justify text-gray-600">
+            <p className="mb-12 text-lg text-justify text-gray-600">
               Where are accidents most prone to happen in Singapore? At what
               times do accidents most commonly happen?
             </p>
@@ -118,7 +118,7 @@ const RoadAccidentsInsights = () => {
             <p className="mb-2 text-md text-gray-600">
               Which highways are the most accident prone?
             </p>
-            <div className="mb-14">
+            <div className="mb-12">
               <div className="flex items-end">
                 <span className="text-3xl w-[65px] font-semibold">PIE</span>
                 <div>
@@ -150,7 +150,7 @@ const RoadAccidentsInsights = () => {
               </div>
             </div>
 
-            <div className="mb-14 flex gap-1">
+            <div className="mb-12 flex gap-1">
               <div>
                 <p className="mb-2 text-md text-gray-600">
                   When are accidents most frequent?
@@ -167,7 +167,7 @@ const RoadAccidentsInsights = () => {
             <p className="mb-2 text-md text-gray-600">
               Which time periods had the most accidents?
             </p>
-            <div className="mb-14">
+            <div className="mb-12">
               <p className="text-2xl font-semibold">8 AM - 9 AM</p>
               <p className="text-gray-600">7 AM - 8 AM</p>
               <p className="text-gray-600">6 PM - 7 PM</p>
@@ -190,7 +190,7 @@ const RoadAccidentsInsights = () => {
           />
           <div>
             <p className="text-2xl font-bold">Accident Statistics</p>
-            <p className="mb-14 text-lg text-gray-600">
+            <p className="mb-12 text-lg text-justify text-gray-600">
               The number of accidents yearly has been steadily increasing since
               the covid pandemic in 2020
             </p>
@@ -198,7 +198,7 @@ const RoadAccidentsInsights = () => {
             <p className="mb-2 text-md text-gray-600">
               Which vehicles are the most accident prone?
             </p>
-            <div className="mb-14">
+            <div className="mb-12">
               <span className="text-3xl font-semibold">Motor Cars</span>
               <div className="text-sm mb-3">
                 <span className="pb-1 text-gray-500">Average of</span>
