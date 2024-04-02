@@ -1,7 +1,107 @@
+import { useEffect, useRef } from "react";
+import ApexCharts from "apexcharts";
 import TableauEmbed from "../components/TableauEmbed";
 import MorningRush from "../assets/morning-rush.svg";
 
 const RoadAccidentsInsights = () => {
+  const chartRef = useRef(null);
+
+  useEffect(() => {
+    const options = {
+      chart: {
+        type: "line",
+        height: 350,
+        background: "transparent",
+        toolbar: {
+          show: false
+        }
+      },
+      series: [
+        {
+          name: "Accident Fatalities",
+          type: "line",
+          data: [68, 39, 6],
+          color: "#2563EB",
+        },
+        {
+          name: "Accident Injuries",
+          type: "line",
+          data: [4222, 849, 2311],
+          color: "#FF4560",
+        },
+      ],
+      yaxis: [
+        {
+          axisTicks: {
+            show: true,
+          },
+          axisBorder: {
+            show: true,
+            color: "#2563EB",
+          },
+          labels: {
+            style: {
+              colors: "#2563EB",
+            },
+          },
+          title: {
+            text: "Accident Fatalities",
+            style: {
+              color: "#2563EB",
+            },
+          },
+        },
+        {
+          opposite: true,
+          axisTicks: {
+            show: true,
+          },
+          axisBorder: {
+            show: true,
+            color: "#FF4560",
+          },
+          labels: {
+            style: {
+              colors: "#FF4560",
+            },
+          },
+          title: {
+            text: "Accident Injuries",
+            style: {
+              color: "#FF4560",
+            },
+          },
+        },
+      ],
+      xaxis: {
+        categories: [
+          "Motor Cyclists & Pillion Riders",
+          "Pedestrians",
+          "Motor Cars",
+        ],
+        labels: {
+          formatter: function (value: string) {
+            if (value === "Motor Cyclists & Pillion Riders") {
+              return "Motor Cyclists";
+            } else {
+              return value;
+            }
+          },
+        },
+      },
+      tooltip: {
+        enabled: true,
+      },
+    };
+
+    const chart = new ApexCharts(chartRef.current, options);
+    chart.render();
+
+    return () => {
+      chart.destroy();
+    };
+  }, []);
+
   return (
     <>
       <div className="pt-10 pb-16 bg-[#F2F2F2]">
@@ -86,7 +186,7 @@ const RoadAccidentsInsights = () => {
         <div className="mt-10 flex gap-5 justify-between w-11/12 mx-auto">
           <TableauEmbed
             url="https://public.tableau.com/views/Visualisations_17110383019890/TrafficAccidentsDashboard?:language=en-GB&:sid=&:display_count=n&:origin=viz_share_link"
-            width="2000px"
+            width="1800px"
             height="700px"
           />
           <div>
@@ -120,35 +220,10 @@ const RoadAccidentsInsights = () => {
             </div>
 
             <p className="mb-2 text-md text-gray-600">
-              Which demographic is the most likely to result in fatalities or injuries?
+              Which demographic is the most prone to fatalities or injuries?
             </p>
             <div className="mb-3">
-              <table className="w-full text-center shadow-lg rtl:text-right text-gray-500">
-                <thead>
-                  <tr className="text-base bg-gray-200 border-b text-black">
-                    <th></th>
-                    <th>Fatalities</th>
-                    <th>Injuries</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="bg-white border-b hover:bg-gray-100 hover:text-black">
-                    <td className="pl-1">1.</td>
-                    <td>Motorcyclists & Pillion Riders</td>
-                    <td>Motorcyclists & Pillion Riders</td>
-                  </tr>
-                  <tr className="bg-white border-b hover:bg-gray-100 hover:text-black">
-                    <td className="pl-1">2.</td>
-                    <td>Pedestrians</td>
-                    <td>Motor Cars</td>
-                  </tr>
-                  <tr className="bg-white border-b hover:bg-gray-100 hover:text-black">
-                    <td className="pl-1">3.</td>
-                    <td>Motor Cars</td>
-                    <td>Pedestrians</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div ref={chartRef}></div>
             </div>
           </div>
         </div>
