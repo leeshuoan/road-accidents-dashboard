@@ -175,7 +175,7 @@ const RoadAccidentsInsights = () => {
           </div>
           <TableauEmbed
             url="https://public.tableau.com/views/dynamic_17113649522640/Dashboard?:language=en-GB&publish=yes&:sid=&:display_count=n&:origin=viz_share_link"
-            width="2000px"
+            width="2500px"
             height="700px"
           />
         </div>
@@ -186,7 +186,7 @@ const RoadAccidentsInsights = () => {
           <TableauEmbed
             url="https://public.tableau.com/views/Visualisations_17110383019890/TrafficAccidentsDashboard?:language=en-GB&:sid=&:display_count=n&:origin=viz_share_link"
             width="1800px"
-            height="700px"
+            height="800px"
           />
           <div>
             <p className="text-2xl font-bold">Accident Statistics</p>
