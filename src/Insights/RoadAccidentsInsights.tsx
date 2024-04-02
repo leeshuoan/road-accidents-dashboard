@@ -199,8 +199,8 @@ const RoadAccidentsInsights = () => {
               Which vehicles are the most accident prone?
             </p>
             <div className="mb-12">
-              <span className="text-3xl font-semibold">Motor Cars</span>
-              <div className="text-sm mb-3">
+              <span className="text-2xl font-semibold">Motor Cars</span>
+              <div className="text-xs mb-3">
                 <span className="pb-1 text-gray-500">Average of</span>
                 <span className="text-red-600 font-semibold">&nbsp;20.5</span>
                 <span className="pb-1 text-gray-500">
@@ -209,7 +209,7 @@ const RoadAccidentsInsights = () => {
               </div>
 
               <span className="text-xl">Motorcycles & Scooters</span>
-              <div className="text-sm">
+              <div className="text-xs">
                 <span className="pb-1 text-gray-500">Average of</span>
                 <span className="text-red-600 font-semibold">&nbsp;11.2</span>
                 <span className="pb-1 text-gray-500">

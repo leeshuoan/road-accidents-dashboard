@@ -77,7 +77,7 @@ const PublicTransportInsights = () => {
           />
           <div>
             <p className="mb-2 text-2xl font-bold">Singapore's Bus Network</p>
-            <p className="mb-14 text-lg text-gray-600">
+            <p className="mb-14 text-lg text-justify text-gray-600">
               Singapore's Bus Network forms a significant part of public
               transport in Singapore. Analysing this network could inform
               policies and initiatives geared towards optimising public
@@ -95,8 +95,8 @@ const PublicTransportInsights = () => {
       <div className="pt-10 pb-16 bg-[#F2F2F2]">
         <div className="flex justify-between gap-5 w-11/12 mx-auto">
           <div>
-            <p className="mb-2 text-2xl font-bold">Singapore's Mrt Network</p>
-            <p className="mb-14 text-lg text-gray-600">
+            <p className="mb-2 text-2xl font-bold">Singapore's MRT Network</p>
+            <p className="mb-14 text-lg text-justify text-gray-600">
               Singapore's Mrt Network forms a significant part of public
               transport in Singapore. Analysing this network could inform
               policies and initiatives geared towards optimising public
