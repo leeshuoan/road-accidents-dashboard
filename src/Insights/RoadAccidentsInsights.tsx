@@ -110,7 +110,7 @@ const RoadAccidentsInsights = () => {
             <p className="mb-2 text-3xl text-red-600 font-bold">
               Accident Patterns
             </p>
-            <p className="mb-14 text-lg text-gray-600">
+            <p className="mb-14 text-lg text-justify text-gray-600">
               Where are accidents most prone to happen in Singapore? At what
               times do accidents most commonly happen?
             </p>
@@ -155,8 +155,7 @@ const RoadAccidentsInsights = () => {
                 <p className="mb-2 text-md text-gray-600">
                   When are accidents most frequent?
                 </p>
-                <p className="text-2xl font-semibold">Monday</p>
-                <p className="mb-1 text-2xl font-semibold">8 AM - 9 AM</p>
+                <p className="text-2xl font-semibold">Monday 8 AM - 9 AM</p>
                 <p className="text-sm text-gray-600">
                   Peak of <span className="font-bold text-red-500">9</span>{" "}
                   accidents on 18 March
