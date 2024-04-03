@@ -7,7 +7,7 @@ import {
   TrafficLayerF,
   InfoWindowF,
 } from "@react-google-maps/api";
-import pin from "../assets/pin.png";
+// import pin from "../assets/pin.png";
 
 interface MapProps {
   trafficLayerVisible: boolean;
