@@ -1,7 +1,7 @@
 import TableauEmbed from "../components/TableauEmbed";
 import { useEffect, useRef } from "react";
 import ApexCharts from "apexcharts";
-import HousingDevelopmentImg from "../assets/housing-development.png";
+import HousingDevelopmentImg from "../assets/housing-development.jpg";
 
 const PublicTransportInsights = () => {
   const chartRef = useRef(null);
