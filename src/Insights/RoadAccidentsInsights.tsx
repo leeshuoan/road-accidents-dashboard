@@ -202,7 +202,7 @@ const RoadAccidentsInsights = () => {
               <span className="text-2xl font-semibold">Motor Cars</span>
               <div className="text-xs mb-3">
                 <span className="pb-1 text-gray-500">Average of</span>
-                <span className="text-red-600 font-semibold">&nbsp;20.5</span>
+                <span className="text-red-600 font-semibold">&nbsp;14.8</span>
                 <span className="pb-1 text-gray-500">
                   &nbsp;accidents each day in 2022
                 </span>

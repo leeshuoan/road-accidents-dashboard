@@ -1,6 +1,7 @@
 import TableauEmbed from "../components/TableauEmbed";
 import { useEffect, useRef } from "react";
 import ApexCharts from "apexcharts";
+import HousingDevelopmentImg from "../assets/housing-development.png";
 
 const PublicTransportInsights = () => {
   const chartRef = useRef(null);
@@ -84,21 +85,39 @@ const PublicTransportInsights = () => {
               especially to places that are out of the way.
             </p>
 
-            <p className="text-gray-600 text-sm pt-3">
-              TOTAL NUMBER OF BUS STOPS
-            </p>
-            <p className="mb-3 font-bold text-4xl">5,103</p>
-
-            <p className="text-gray-600 text-sm pt-3">
-              TOTAL NUMBER OF BUS SERVICES
-            </p>
-            <p className="mb-12 font-bold text-4xl">352</p>
-
             <p className="mb-2 text-md text-gray-600">
               Most passenger tap-ins are concentrated in
             </p>
             <p className="mb-12 text-lg font-semibold">
-              Woodlands, Jurong West, Tampines
+              Woodlands, Boon Lay, Tampines
+            </p>
+
+            <p className="pb-1 text-center">Future Housing Development Areas</p>
+
+            <a
+              href={HousingDevelopmentImg}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={HousingDevelopmentImg} alt="Housing Development" />
+            </a>
+
+            <a
+              className="pt-1 text-xs hover:underline hover:text-red-500"
+              href="https://www.ura.gov.sg/Corporate/Planning/Long-Term-Plan-Review/Space-for-Our-Dreams-Exhibition/Live/More-Homes"
+              target="_blank"
+            >
+              <p className="text-center">
+                Retrieved from Urban Redevelopment Authority
+              </p>
+            </a>
+
+            <p className="pt-3 text-justify">
+              Future areas marked for housing redevelopment currently have
+              sparse bus coverage, including:{" "}
+              <span className="font-semibold">
+                Tengah, Sembawang North, Lower Seletar
+              </span>
             </p>
           </div>
         </div>
@@ -114,26 +133,25 @@ const PublicTransportInsights = () => {
               gaps in the network for future station planning.
             </p>
 
-            <p className="text-gray-600 text-sm pt-3">
-              TOTAL NUMBER OF MRT STATIONS
-            </p>
-            <p className="mb-3 font-bold text-4xl">134</p>
-
-            <p className="text-gray-600 text-sm pt-3">
-              TOTAL NUMBER OF MRT LINES
-            </p>
-            <p className="mb-12 font-bold text-4xl">
-              9
-              <span className="pl-1 text-sm italic font-normal text-gray-500">
-                &nbsp;including 3 LRT lines
-              </span>
-            </p>
-
             <p className="text-md text-gray-600">
               Which stations have the most traffic?
             </p>
+            <div className="pt-4 pb-6" ref={chartRef}></div>
 
-            <div className="pt-4" ref={chartRef}></div>
+            <p className="mb-2 text-md text-gray-600">
+              Most passenger tap-ins on Weekends
+            </p>
+            <p className="mb-6 text-lg font-semibold">
+            Orchard, Jurong East, Bayfront
+            </p>
+
+            <p className="mb-2 text-md text-gray-600">
+              Most passenger tap-ins on Weekdays
+            </p>
+            <p className="mb-12 text-lg font-semibold">
+              Jurong East, Raffles Place
+            </p>
+
           </div>
           <TableauEmbed
             url="https://public.tableau.com/views/Visualisations_17110383019890/MRTDashboard?:language=en-GB&:sid=&:display_count=n&:origin=viz_share_link"
