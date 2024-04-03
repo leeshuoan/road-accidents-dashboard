@@ -44,8 +44,11 @@ function Map({ trafficLayerVisible, mapKey, center, accidentData }: MapProps) {
               <MarkerF
                 key={index}
                 icon={{
-                  url: pin,
-                  scaledSize: new window.google.maps.Size(25, 25),
+                  path: google.maps.SymbolPath.CIRCLE,
+                  scale: 8.5,
+                  fillColor: "#F00",
+                  fillOpacity: 0.4,
+                  strokeWeight: 0.2,
                 }}
                 position={{ lat: accident.Latitude, lng: accident.Longitude }}
                 title="Accident"
@@ -62,7 +65,7 @@ function Map({ trafficLayerVisible, mapKey, center, accidentData }: MapProps) {
                   lat: accidentData[selectedMarker].Latitude,
                   lng: accidentData[selectedMarker].Longitude,
                 }}
-                options={{ pixelOffset: new window.google.maps.Size(0, -25) }}
+                options={{ pixelOffset: new window.google.maps.Size(0, -10) }}
                 onCloseClick={() => setSelectedMarker(null)}
               >
                 <div>
