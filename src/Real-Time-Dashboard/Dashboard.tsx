@@ -16,7 +16,7 @@ interface AccidentData {
 const Dashboard = () => {
   const [center] = useState({ lat: 1.3521, lng: 103.8198 });
   const [mapKey, setMapKey] = useState<number>(0);
-  const [timeRange, setTimeRange] = useState<string>("all");
+  const [timeRange, setTimeRange] = useState<string>("7d");
   const [trafficLayerVisible, setTrafficLayerVisible] =
     useState<boolean>(false);
   const [mapData, setMapData] = useState<AccidentData[]>([]);
@@ -80,7 +80,7 @@ const Dashboard = () => {
       .then((data) => {
         setAccidentData(data);
         console.log(accidentData);
-        setMapData(data);
+        setMapData(filterAccidentsByTimeRange("7d"));
       });
   }, []);
 
@@ -97,7 +97,7 @@ const Dashboard = () => {
             />
             <div className="mt-2 flex">
               <div className="flex">
-                <button
+                {/* <button
                   className={`py-1 px-4 shadow-sm border border-r-0 text-sm ${
                     timeRange === "all"
                       ? "bg-red-600 text-white"
@@ -106,7 +106,7 @@ const Dashboard = () => {
                   onClick={() => filterAccidentsByTimeRange("all")}
                 >
                   All Time
-                </button>
+                </button> */}
                 <button
                   className={`py-1 px-4 shadow-sm border border-r-0 text-sm ${
                     timeRange === "7d"
