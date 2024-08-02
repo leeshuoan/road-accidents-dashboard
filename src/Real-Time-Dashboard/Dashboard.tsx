@@ -79,8 +79,7 @@ const Dashboard = () => {
       .then((response) => response.json())
       .then((data) => {
         setAccidentData(data);
-        console.log(accidentData);
-        setMapData(filterAccidentsByTimeRange("7d"));
+        filterAccidentsByTimeRange("7d")
       });
   }, []);
 
